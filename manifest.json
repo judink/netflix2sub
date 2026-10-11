@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "함께 자막 · 한국어 / Українська",
+  "version": "0.2.0",
+  "description": "넷플릭스 한국어 자막 트랙을 DeepSeek로 미리 번역해 우크라이나어 자막을 함께 표시합니다.",
+  "minimum_chrome_version": "111",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://api.deepseek.com/*"],
+  "background": { "service_worker": "background.js" },
+  "action": { "default_popup": "popup.html", "default_title": "함께 자막" },
+  "content_scripts": [
+    { "matches": ["https://www.netflix.com/*"], "js": ["capture.js"], "run_at": "document_start", "world": "MAIN" },
+    { "matches": ["https://www.netflix.com/*"], "js": ["subtitles.js", "content.js"], "run_at": "document_start" }
+  ]
+}
